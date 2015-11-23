@@ -1,0 +1,21 @@
+This is your new Play application
+=================================
+
+This file will be packaged with your application, when using `activator dist`.
+
+
+
+MySQL
+=====
+docker run --name cryptsy -e MYSQL_ROOT_PASSWORD=cryptsy -d mysql:5
+
+
+docker run -it --link cryptsy:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+SQL Init Command
+================
+CREATE DATABASE cryptsy;
+CREATE USER IF NOT EXISTS 'cryptsy'@'%' IDENTIFIED BY 'cryptsy';
+GRANT ALL ON cryptsy.* TO 'cryptsy'@'%';
+
+SELECT User FROM mysql.user;

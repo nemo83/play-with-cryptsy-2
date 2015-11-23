@@ -1,0 +1,16 @@
+{
+  "channel": "ticker.3",
+  "trade": {
+    "timestamp": 1447834856,
+    "datetime": "2015-11-18 03:20:56 EST",
+    "marketid": "3",
+    "topsell": {
+      "price": "0.00969998",
+      "quantity": "0.58624270"
+    },
+    "topbuy": {
+      "price": "0.00968889",
+      "quantity": "23.25215000"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "channel": "trade.3",
+  "trade": {
+    "tradeid": "107958688",
+    "timestamp": 1447834218,
+    "datetime": "2015-11-18 03:10:18 EDT",
+    "marketid": "3",
+    "marketname": "LTC\/BTC",
+    "quantity": "0.00203794",
+    "price": "0.00968886",
+    "total": "0.00001975",
+    "type": "Sell"
+  }
+}

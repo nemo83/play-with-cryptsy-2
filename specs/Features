@@ -1,0 +1,21 @@
+Features
+========
+* Connect to ticker
+  ** Try to listen for buy/sell events and if a sell with very low price happen buy. Sell at the contrary. Always by comparing it with the avg price
+
+
+
+
+
+
+
+
+
+DB Schema
+=========
+
+Buy Transaction
+id, currency bought, with currency, Amount Bought, Price (unit price), Total Price, Fee
+
+Sell Transaction
+id, buyTxId, amount, unit price, total price, fee
