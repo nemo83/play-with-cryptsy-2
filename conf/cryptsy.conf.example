@@ -1,0 +1,6 @@
+cryptsy: {
+  key: {
+    public: "MY_PUBLIC_KEY",
+    secret: "MY_PRIVATE_KEY"
+  }
+}

@@ -1,11 +1,12 @@
 package services
 
-import com.google.inject.Inject
+import com.google.inject.{Inject, Singleton}
 import play.api.Configuration
-import play.api.Play.current
-import play.api.libs.ws.WS
+import play.api.libs.ws.WSClient
 
-class AccountService @Inject()(configuration: Configuration) extends CryptsyClient {
+@Singleton
+class AccountService @Inject()(configuration: Configuration,
+                               ws: WSClient) extends CryptsyClient {
 
   val publicKey = configuration.getString("cryptsy.key.public").get
 
@@ -18,7 +19,7 @@ class AccountService @Inject()(configuration: Configuration) extends CryptsyClie
     val body = queryParams.map { case (param, value) => s"$param=$value" }.mkString("&")
     val signature = signRequest(body, secretKey)
 
-    val request = WS.url(s"$apiV2BaseUrl")
+    ws.url(s"$apiV2BaseUrl")
       .withBody(body)
       .withHeaders(("Key", publicKey), ("Sign", signature))
       .post(body)
