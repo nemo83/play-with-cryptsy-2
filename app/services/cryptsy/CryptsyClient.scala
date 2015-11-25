@@ -1,4 +1,4 @@
-package services
+package services.cryptsy
 
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec

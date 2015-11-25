@@ -1,7 +1,9 @@
+package models
+
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-package object models {
+package object cryptsy {
 
   sealed trait CryptsyMessage
 
@@ -27,10 +29,10 @@ package object models {
 
   implicit val tradeHistoryDetailReader: Reads[TradeHistoryDetail] = (
     (JsPath \ "tradeid").read[String] and
-    (JsPath \ "timestamp").read[Long] and
-    (JsPath \ "datetime").read[String] and
-    (JsPath \ "initiate_ordertype").read[String] and
-    (JsPath \ "tradeprice").read[Double] and
+      (JsPath \ "timestamp").read[Long] and
+      (JsPath \ "datetime").read[String] and
+      (JsPath \ "initiate_ordertype").read[String] and
+      (JsPath \ "tradeprice").read[Double] and
       (JsPath \ "quantity").read[Double] and
       (JsPath \ "total").read[Double]
     ) (TradeHistoryDetail.apply _)

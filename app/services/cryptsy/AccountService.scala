@@ -1,4 +1,4 @@
-package services
+package services.cryptsy
 
 import com.google.inject.{Inject, Singleton}
 import play.api.Configuration

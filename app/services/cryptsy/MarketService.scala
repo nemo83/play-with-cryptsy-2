@@ -1,9 +1,11 @@
-package services
+package services.cryptsy
 
 import models._
+import models.cryptsy.{MarketsVolume, TradeHistory, TradeHistoryDetail}
 import org.joda.time.DateTime
 import play.api.Play.current
 import play.api.libs.ws.WS
+import services.Math
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
