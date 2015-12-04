@@ -15,6 +15,16 @@ package object poloniex {
 
   case class TradeHistory(globalTradeId: Long, tradeId: Long, date: String, tradeType: String, rate: String, amount: String, total: String) extends PoloniexMessage
 
+//  case class CurrencyVolume(volumes: Map[String, Map[String, Double]], totalBTC: String, totalUSDT: String, totalXMR: String, totalXUSD: String) extends PoloniexMessage
+//
+//  implicit val currencyVolumeReader: Reads[CurrencyVolume] = (
+//    (JsPath \ "globalTradeID").read[Long] and
+//      (JsPath \ "tradeID").read[Long] and
+//      (JsPath \ "date").read[String] and
+//      (JsPath \ "type").read[String]
+//    ) (CurrencyVolume.apply _)
+
+
   implicit val tradeHistory: Reads[TradeHistory] = (
     (JsPath \ "globalTradeID").read[Long] and
       (JsPath \ "tradeID").read[Long] and

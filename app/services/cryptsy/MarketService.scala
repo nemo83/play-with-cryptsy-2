@@ -5,7 +5,7 @@ import models.cryptsy.{MarketsVolume, TradeHistory, TradeHistoryDetail}
 import org.joda.time.DateTime
 import play.api.Play.current
 import play.api.libs.ws.WS
-import services.Math
+import services.math.Math
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -32,15 +32,9 @@ class MarketService extends CryptsyClient {
     val stop: Long = stopMillis / 1000L
     val start: Long = startMillis / 1000L
 
-    println(s"Start: $start, Stop: $stop")
-
-    //    val marketsVolumeExtFut = WS.url(s"$apiV2BaseUrl/v2/markets/$marketId/tradehistory")
-    //      .withQueryString(("start", start.toString), ("stopMillis", stopMillis.toString))
-    //      .get()
-    val request = WS.url(s"$apiV2BaseUrl/v2/markets/$marketId/tradehistory")
-      .withQueryString(("start", start.toString), ("stop", stop.toString))
-    println(s"request: $request, ${request.url}")
-    val marketsVolumeExtFut = request.get()
+    val marketsVolumeExtFut = WS.url(s"$apiV2BaseUrl/v2/markets/$marketId/tradehistory")
+      //      .withQueryString(("start", start.toString), ("stop", stop.toString))
+      .get()
 
     marketsVolumeExtFut.map(response => response.json.as[TradeHistory].tradeHistoryDetails)
 
@@ -51,11 +45,18 @@ class MarketService extends CryptsyClient {
     val tradePrices = marketTrades.map(trade => BigDecimal(trade.tradePrice))
     val btcVolume = marketTrades.map(trade => BigDecimal(trade.total)).sum
 
+    val timestamps = marketTrades.map(_.timestamp)
+    val minTimestamp = timestamps.min
+    val maxTimestamp = timestamps.max
+
+    val transactionPerSecond = marketTrades.size.toDouble / (maxTimestamp - minTimestamp).toDouble
+
     TradesStatistic(tradePrices.min,
       tradePrices.max,
       Math.mean(tradePrices),
       Math.standardDeviation(tradePrices),
       marketTrades.size.toLong,
+      transactionPerSecond * 60,
       btcVolume,
       duration)
 

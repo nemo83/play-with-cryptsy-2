@@ -12,7 +12,13 @@ class MarketServiceTest extends Specification {
 
     "get list of trade history" in new WithApplication {
 
-      val marketService = new MarketService(WsTestClient.)
+//      val marketService = new MarketService(WsTestClient.)
+
+    }
+
+    "get volumes" in new WithApplication {
+
+      //      val marketService = new MarketService(WsTestClient.)
 
     }
 
